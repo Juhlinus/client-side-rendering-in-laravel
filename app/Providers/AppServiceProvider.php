@@ -18,6 +18,20 @@ class AppServiceProvider extends ServiceProvider
         ViewFactory::macro('component', function ($name, $data = []) {
             return View::make('app', ['name' => $name, 'data' => $data]);
         });
+
+        View::composer('*', function ($view) {
+            if (Auth::user()) {
+                $view->with('shared', [
+                    'auth' => [
+                        'user' => [
+                            'id' => Auth::user()->id,
+                            'name' => Auth::user()->name,
+                            'email' => Auth::user()->email,
+                        ],
+                    ],
+                ]);
+            }
+        });
     }
 
     /**

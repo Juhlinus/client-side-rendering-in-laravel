@@ -9,8 +9,13 @@
     <meta name="turbolinks-cache-control" content="no-cache">
 </head>
 <body>
-
-<div id="app" data-component="{{ $name }}" data-props="{{ json_encode($data) }}"></div>
-
+    <script>
+        window.shared = @json($shared ?? []);
+    </script>
+    <div 
+        id="app" 
+        data-component="{{ $name }}" 
+        data-props="{{ json_encode($data) }}"
+    ></div>
 </body>
 </html>
